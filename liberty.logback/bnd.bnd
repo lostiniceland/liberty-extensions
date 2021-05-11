@@ -1,0 +1,33 @@
+-buildpath: \
+	osgi.annotation,\
+	org.osgi.service.metatype.annotations,\
+	org.osgi.service.component.annotations,\
+	ch.qos.logback.core,\
+	slf4j.api,\
+	ch.qos.logback.classic,\
+	com.ibm.websphere.appserver.spi.logging,\
+	org.osgi.service.cm,\
+	javax.servlet-api
+-privatepackage: liberty.logback
+-includeresource: {src/main/resources}
+
+# Provide-Capability: osgi.serviceloader;osgi.serviceloader=javax.servlet.ServletContainerInitializer
+
+Service-Component: \
+  liberty.logback.ResourceProvider; \
+    implementation:=com.ibm.wsspi.classloading.ResourceProvider; \
+    provide:=com.ibm.wsspi.classloading.ResourceProvider; \
+    configuration-policy:=optional; \
+    properties:="resources=META-INF/services/javax.servlet.ServletContainerInitializer"
+
+
+-runrepos: \
+	Workspace,\
+	Release,\
+	Build,\
+	Liberty Runtime,\
+	Runtime
+Import-Package: \
+	javax.servlet;version='4.0.0',\
+	ch.qos.logback.classic,\
+	*

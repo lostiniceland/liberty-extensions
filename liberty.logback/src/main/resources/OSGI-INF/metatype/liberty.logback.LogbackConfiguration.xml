@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0"  
+                   xmlns:ibm="http://www.ibm.com/xmlns/appservers/osgi/metatype/v1.0.0">
+  
+  <OCD id="logback" name="logback">
+    <AD id="file" type="String" name="file" />
+    <AD id="rootLevel" type="String" name="root-level" required="false">
+	 	<Option label="Error" value="error"/>
+	    <Option label="Warn" value="warn"/>
+	    <Option label="Info" value="info"/>
+	    <Option label="Debug" value="debug"/>
+	    <Option label="Trace" value="trace"/>
+    </AD>
+    <AD id="logger" name="logger" ibm:type="pid" ibm:reference="logger-pid"
+      required="false" type="String" />       
+  </OCD>
+  
+  <Designate pid="logback">
+    <Object ocdref="logback" />
+  </Designate>
+  
+  <OCD id="logger" name="logger" description="">
+    <AD id="name" type="String" name="name"/>
+    <AD id="level" type="String" name="level">
+      <Option label="Error" value="error"/>
+      <Option label="Warn" value="warn"/>
+      <Option label="Info" value="info"/>
+      <Option label="Debug" value="debug"/>
+      <Option label="Trace" value="trace"/>
+    </AD>
+  </OCD>
+  
+  <Designate factoryPid="logger-pid">
+    <Object ocdref="logger" />
+  </Designate>
+  
+</metatype:MetaData>
